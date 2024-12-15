@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../redux/authSlice";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import ikon dari react-icons
 
-function Login({ onClose }) {
+function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State untuk toggle password visibility
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
@@ -18,23 +20,23 @@ function Login({ onClose }) {
 
     try {
       const result = await dispatch(loginUser({ email, password })).unwrap();
-      setSuccess(`Welcome, ${result.name.firstname}!`);
+      setSuccess(`Selamat datang, ${result.name.firstname}!`);
       setTimeout(() => {
-        navigate(-1); // Arahkan ke halaman sebelumnya setelah berhasil login
+        navigate(-1); 
       }, 1500);
     } catch (err) {
-      setError("Invalid credentials");
+      setError("Kredensial salah!");
     }
   };
 
-  const handleClose = () => {
-    navigate(-1);
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
   };
 
   return (
-    <div style={styles.overlay} onClick={handleClose}>
+    <div style={styles.overlay} onClick={() => navigate(-1)}>
       <div style={styles.container} onClick={(e) => e.stopPropagation()}>
-        <button style={styles.closeButton} onClick={handleClose}>
+        <button style={styles.closeButton} onClick={() => navigate(-1)}>
           &times;
         </button>
         <h2 style={styles.title}>Masuk</h2>
@@ -49,16 +51,25 @@ function Login({ onClose }) {
               borderColor: error ? "red" : "#ccc",
             }}
           />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{
-              ...styles.input,
-              borderColor: error ? "red" : "#ccc",
-            }}
-          />
+          <div style={styles.passwordContainer}>
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{
+                ...styles.input,
+                borderColor: error ? "red" : "#ccc",
+              }}
+            />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              style={styles.passwordToggle}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
           {error && <p style={styles.error}>{error}</p>}
           {success && <p style={styles.success}>{success}</p>}
           <button type="submit" style={styles.button}>
@@ -118,6 +129,20 @@ const styles = {
     border: "1px solid #ccc",
     borderRadius: "5px",
     boxSizing: "border-box",
+  },
+  passwordContainer: {
+    position: "relative",
+  },
+  passwordToggle: {
+    position: "absolute",
+    top: "50%",
+    right: "10px",
+    transform: "translateY(-50%)",
+    background: "none",
+    border: "none",
+    cursor: "pointer",
+    fontSize: "18px",
+    color: "#888",
   },
   button: {
     width: "100%",
