@@ -8,7 +8,7 @@ export const loginUser = createAsyncThunk(
     try {
       const { user } = getState().auth;
       if (user) {
-        return rejectWithValue("A user is already logged in.");
+        return rejectWithValue("Anda telah masuk!");
       }
 
       const response = await axios.get("https://fakestoreapi.com/users");
@@ -18,12 +18,12 @@ export const loginUser = createAsyncThunk(
         firstUser.email !== credentials.email ||
         firstUser.password !== credentials.password
       ) {
-        return rejectWithValue("Invalid credentials");
+        return rejectWithValue("Kredensial tidak valid");
       }
 
       return firstUser; // Jika login berhasil, kirim data user
     } catch (error) {
-      return rejectWithValue("Login failed");
+      return rejectWithValue("Login gagal");
     }
   }
 );
