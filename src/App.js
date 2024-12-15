@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux"; // Mengimpor useSelector untuk memeriksa status login
+import { useSelector } from "react-redux";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import ProductList from "./pages/ProductList";
@@ -10,9 +10,8 @@ import DetailProduct from "./pages/DetailProduct";
 import Footer from "./components/Footer";
 
 function App() {
-  // Fungsi ProtectedRoute untuk membatasi akses ke halaman tertentu
   const ProtectedRoute = ({ children }) => {
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // Status login dari Redux
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); 
     return isAuthenticated ? children : <Navigate to="/login" replace />;
   };
 
@@ -25,7 +24,6 @@ function App() {
           <Route path="/" element={<ProductList />} />
           <Route path="/products/:id" element={<DetailProduct />} />
           <Route path="/login" element={<Login />} />
-          {/* Route Cart dilindungi oleh ProtectedRoute */}
           <Route
             path="/cart"
             element={
