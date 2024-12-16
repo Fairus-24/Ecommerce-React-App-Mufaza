@@ -88,6 +88,8 @@ function Navbar() {
                 )}
               </Link>
             </li>
+            {/* Added line between Cart and Username */}
+            <div style={styles.separator}></div>
             <li style={styles.userWrapper}>
               <FaUser style={styles.userIcon} />
               <span style={styles.username}>{user.username}</span>
@@ -229,6 +231,13 @@ const styles = {
     cursor: "pointer",
     fontSize: "14px",
     transition: "background-color 0.3s",
+  },
+  // New separator style
+  separator: {
+    width: "1px",
+    height: "30px",
+    backgroundColor: "#333",
+    margin: "0 15px",
   },
 };
 
