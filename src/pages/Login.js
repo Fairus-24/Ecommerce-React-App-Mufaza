@@ -20,12 +20,12 @@ function Login() {
 
     try {
       const result = await dispatch(loginUser({ email, password })).unwrap();
-      setSuccess(`Selamat datang, ${result.name.firstname}!`);
+      setSuccess(`Selamat datang, ${result.user.name.firstname}!`);
       setTimeout(() => {
-        navigate(-1); 
+        navigate("/"); // Arahkan ke halaman utama setelah login
       }, 1500);
     } catch (err) {
-      setError("Kredensial salah!");
+      setError(err || "Kredensial salah!");
     }
   };
 
@@ -34,9 +34,9 @@ function Login() {
   };
 
   return (
-    <div style={styles.overlay} onClick={() => navigate(-1)}>
+    <div style={styles.overlay} onClick={() => navigate("/")}>
       <div style={styles.container} onClick={(e) => e.stopPropagation()}>
-        <button style={styles.closeButton} onClick={() => navigate(-1)}>
+        <button style={styles.closeButton} onClick={() => navigate("/")}>
           &times;
         </button>
         <h2 style={styles.title}>Masuk</h2>

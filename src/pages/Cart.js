@@ -117,6 +117,7 @@ function Cart() {
 
 const styles = {
   container: {
+    weight: "full",
     padding: "20px",
   },
   title: {

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Thunk untuk login dengan validasi dari API
+// Thunk untuk login dengan validasi dari API dan mendapatkan token JWT
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (credentials, { getState, rejectWithValue }) => {
@@ -14,6 +14,7 @@ export const loginUser = createAsyncThunk(
       const response = await axios.get("https://fakestoreapi.com/users");
       const firstUser = response.data[0]; // Ambil user index pertama
 
+      // Validasi email dan password
       if (
         firstUser.email !== credentials.email ||
         firstUser.password !== credentials.password
@@ -21,7 +22,21 @@ export const loginUser = createAsyncThunk(
         return rejectWithValue("Kredensial tidak valid");
       }
 
-      return firstUser; // Jika login berhasil, kirim data user
+      // Simulasi mendapatkan token dari API JWT (gunakan data user untuk membuat token)
+      const tokenResponse = await axios.post(
+        "https://fakestoreapi.com/auth/login",
+        {
+          username: firstUser.username,
+          password: credentials.password,
+        }
+      );
+
+      const token = tokenResponse.data.token;
+
+      // Simpan token ke localStorage
+      localStorage.setItem("token", token);
+
+      return { user: firstUser, token }; // Kembalikan data user dan token
     } catch (error) {
       return rejectWithValue("Login gagal");
     }
@@ -29,8 +44,9 @@ export const loginUser = createAsyncThunk(
 );
 
 const initialState = {
-  user: null,
-  isAuthenticated: false,
+  user: JSON.parse(localStorage.getItem("user")) || null,
+  token: localStorage.getItem("token") || null,
+  isAuthenticated: localStorage.getItem("token") ? true : false,
   error: null,
 };
 
@@ -40,7 +56,10 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.user = null;
+      state.token = null;
       state.isAuthenticated = false;
+      localStorage.removeItem("token"); // Hapus token dari localStorage
+      localStorage.removeItem("user");  // Hapus user dari localStorage
     },
   },
   extraReducers: (builder) => {
@@ -49,8 +68,11 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
         state.isAuthenticated = true;
+        // Simpan user ke localStorage
+        localStorage.setItem("user", JSON.stringify(action.payload.user));
         state.error = null;
       })
       .addCase(loginUser.rejected, (state, action) => {
