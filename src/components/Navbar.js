@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/authSlice";
@@ -12,8 +12,6 @@ function Navbar() {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const menuRef = useRef(null);  // Ref untuk menu navbar
-  const hamburgerRef = useRef(null);  // Ref untuk tombol hamburger
 
   const handleLogout = () => {
     dispatch(logout());
@@ -35,29 +33,8 @@ function Navbar() {
     };
 
     window.addEventListener("resize", handleResize);
-
-    // Event listener untuk klik di luar menu navbar
-    const handleClickOutside = (event) => {
-      if (
-        menuRef.current && !menuRef.current.contains(event.target) &&
-        hamburgerRef.current && !hamburgerRef.current.contains(event.target)
-      ) {
-        setIsMenuOpen(false);
-      }
-    };
-
-    // Event listener untuk scroll
-    const handleScroll = () => {
-      setIsMenuOpen(false); // Menutup menu saat scroll
-    };
-
-    window.addEventListener("click", handleClickOutside);
-    window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("click", handleClickOutside);
-      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -67,16 +44,11 @@ function Navbar() {
         <h1 style={styles.logo}>MufazaStore</h1>
       </div>
       {isMobile && (
-        <button
-          ref={hamburgerRef} // Tambahkan ref ke tombol hamburger
-          style={styles.hamburger}
-          onClick={toggleMenu}
-        >
+        <button style={styles.hamburger} onClick={toggleMenu}>
           {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
         </button>
       )}
       <ul
-        ref={menuRef} // Referensi menu untuk pengecekan klik di luar
         style={{
           ...styles.navLinks,
           ...(isMobile && isMenuOpen ? styles.navLinksOpen : {}),
@@ -116,7 +88,7 @@ function Navbar() {
                 )}
               </Link>
             </li>
-            <div style={styles.separator}></div>
+            {!isMenuOpen && <div style={styles.separator}></div>}
             <li style={styles.userWrapper}>
               <FaUser style={styles.userIcon} />
               <span style={styles.username}>{user.username}</span>
@@ -176,6 +148,7 @@ const styles = {
     gap: "15px",
     margin: 0,
     alignItems: "center",
+    transition: "transform 0.3s ease-in-out",
   },
   navLinksOpen: {
     display: "flex",
@@ -189,11 +162,9 @@ const styles = {
     padding: "20px 0",
     gap: "10px",
     zIndex: 9,
-    transform: "translateY(0)", // Menggunakan transform untuk menampilkan
-    opacity: 1, // Opacity 100%
   },
   navLinksHidden: {
-    display: "none", // Tidak ada transisi, langsung disembunyikan
+    display: "none",
   },
   link: {
     textDecoration: "none",
@@ -265,11 +236,6 @@ const styles = {
     height: "30px",
     backgroundColor: "#333",
     margin: "0 15px",
-  },
-  "@media (max-width: 768px)": {
-    separator: {
-      visibility: "hidden",
-    },
   },
 };
 

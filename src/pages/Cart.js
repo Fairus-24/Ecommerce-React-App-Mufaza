@@ -62,9 +62,9 @@ function Cart() {
         dispatch(decreaseStock({ id: item.id, quantity: quantities[item.id] }));
       });
       dispatch(clearCart());
-      navigate("/"); 
+      navigate("/");
     } else {
-      alert(errorMessage); 
+      alert(errorMessage);
     }
   };
 
@@ -86,8 +86,8 @@ function Cart() {
               <img src={item.image} alt={item.title} style={styles.image} />
             </div>
             <div style={styles.cartItemDetails}>
-              <div style={styles.productTitle}>
-                {item.title}
+              <div style={styles.productTitleContainer}>
+                <div style={styles.productTitle}>{item.title}</div>
                 {quantities[item.id] > stock[item.id] && (
                   <span style={styles.errorMessage}>Stok tidak cukup!</span>
                 )}
@@ -117,8 +117,9 @@ function Cart() {
 
 const styles = {
   container: {
-    weight: "full",
     padding: "20px",
+    maxWidth: "900px",
+    margin: "0 auto",
   },
   title: {
     fontSize: "24px",
@@ -137,8 +138,7 @@ const styles = {
     padding: "15px",
     borderRadius: "8px",
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-    width: "100%",
-    alignItems: "flex-start",
+    position: "relative",
   },
   cartItemImage: {
     width: "100%",
@@ -153,10 +153,15 @@ const styles = {
   cartItemDetails: {
     width: "100%",
   },
+  productTitleContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "10px",
+  },
   productTitle: {
     fontWeight: "bold",
     fontSize: "18px",
-    marginBottom: "10px",
   },
   price: {
     fontSize: "16px",
@@ -222,25 +227,29 @@ const styles = {
     cursor: "pointer",
   },
   errorMessage: {
+    position: "absolute",
+    top: "10px",
+    right: "10px",
     color: "red",
     fontSize: "12px",
-    marginLeft: "10px",
   },
-
   "@media (max-width: 480px)": {
-    table: {
-      fontSize: "12px", // Even smaller font size
+    container: {
+      padding: "10px",
     },
-    quantityControls: {
-      width: "100%", // Full-width quantity controls
+    cartItem: {
+      flexDirection: "column",
+      alignItems: "center",
     },
-    adjustButton: {
-      padding: "5px", // Reduce button size further
+    productTitleContainer: {
+      flexDirection: "column",
+      alignItems: "flex-start",
     },
-    removeBtn: {
-      padding: "5px 8px", // Smaller remove button
+    errorMessage: {
+      top: "5px",
+      right: "5px",
     },
   },
 };
-  
+
 export default Cart;
