@@ -25,7 +25,7 @@ function Login() {
         navigate("/"); // Arahkan ke halaman utama setelah login
       }, 1500);
     } catch (err) {
-      setError(err || "Kredensial salah!");
+      setError(err || "Password salah!");
     }
   };
 

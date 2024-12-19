@@ -19,7 +19,7 @@ export const loginUser = createAsyncThunk(
         firstUser.email !== credentials.email ||
         firstUser.password !== credentials.password
       ) {
-        return rejectWithValue("Kredensial tidak valid");
+        return rejectWithValue("Password tidak valid");
       }
 
       // Simulasi mendapatkan token dari API JWT (gunakan data user untuk membuat token)
