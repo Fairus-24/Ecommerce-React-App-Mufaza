@@ -53,7 +53,7 @@ function Cart() {
     cartItems.forEach((item) => {
       if (quantities[item.id] > stock[item.id]) {
         isCheckoutValid = false;
-        errorMessage = `Not enough stock for ${item.title}.`;
+        errorMessage = `Stock tidak cukup pada produk "${item.title}."`;
       }
     });
 
@@ -104,9 +104,9 @@ function Cart() {
           </div>
         ))}
       </div>
-      <div style={styles.summary}>
+      <div style={styles.footer}>
         <p style={styles.total}>Total Harga: ${totalAmount.toFixed(2)}</p>
-        <div>
+        <div style={styles.buttonGroup}>
           <button onClick={handleGoBack} style={styles.backButton}>Kembali</button>
           <button onClick={handleCheckout} style={styles.checkoutBtn}>Checkout</button>
         </div>
@@ -120,6 +120,7 @@ const styles = {
     padding: "20px",
     maxWidth: "900px",
     margin: "0 auto",
+    fontFamily: "Roboto, sans-serif",
   },
   title: {
     fontSize: "24px",
@@ -130,6 +131,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: "15px",
+    marginBottom: "50px",
   },
   cartItem: {
     display: "flex",
@@ -199,15 +201,24 @@ const styles = {
     borderRadius: "5px",
     cursor: "pointer",
   },
-  summary: {
+  footer: {
+    position: "sticky",
+    bottom: 0,
+    backgroundColor: "#fff",
+    borderTop: "1px solid #ddd",
+    padding: "15px",
     display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    gap: "15px",
+    justifyContent: "space-between",
+    alignItems: "center",
+    boxShadow: "0 -2px 4px rgba(0, 0, 0, 0.1)",
   },
   total: {
     fontSize: "20px",
     fontWeight: "bold",
+  },
+  buttonGroup: {
+    display: "flex",
+    gap: "10px",
   },
   backButton: {
     padding: "10px 15px",
@@ -216,7 +227,6 @@ const styles = {
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
-    marginRight: "10px",
   },
   checkoutBtn: {
     padding: "10px 20px",
@@ -230,25 +240,12 @@ const styles = {
     position: "absolute",
     top: "10px",
     right: "10px",
-    color: "red",
+    padding: "5px",
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: "red",
+    borderRadius: "5px",
     fontSize: "12px",
-  },
-  "@media (max-width: 480px)": {
-    container: {
-      padding: "10px",
-    },
-    cartItem: {
-      flexDirection: "column",
-      alignItems: "center",
-    },
-    productTitleContainer: {
-      flexDirection: "column",
-      alignItems: "flex-start",
-    },
-    errorMessage: {
-      top: "5px",
-      right: "5px",
-    },
   },
 };
 
