@@ -23,12 +23,11 @@ function Navbar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Update state `isMobile` saat ukuran layar berubah
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
       if (window.innerWidth > 768) {
-        setIsMenuOpen(false); // Tutup menu jika berubah ke desktop
+        setIsMenuOpen(false); 
       }
     };
 
