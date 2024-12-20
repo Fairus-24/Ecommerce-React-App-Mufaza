@@ -125,6 +125,7 @@ const styles = {
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
     fontFamily: "'Poppins', sans-serif",
     position: "relative",
+    userSelect: "none",
   },
   logoContainer: {
     flex: 1,
@@ -170,7 +171,8 @@ const styles = {
     textDecoration: "none",
     color: "#333",
     fontSize: "16px",
-    transition: "color 0.3s",
+    transition: "color 0.3s, transform 0.3s",
+    position: "relative",
   },
   cartWrapper: {
     position: "relative",
@@ -237,6 +239,13 @@ const styles = {
     backgroundColor: "#333",
     margin: "0 15px",
   },
+};
+
+// Hover effects for links
+styles.link[":hover"] = {
+  color: "#2a9d8f",
+  transform: "scale(1.1)",
+  textShadow: "0px 4px 8px rgba(42, 157, 143, 0.6)",
 };
 
 export default Navbar;

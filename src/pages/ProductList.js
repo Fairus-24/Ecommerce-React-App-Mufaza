@@ -25,7 +25,6 @@ function ProductList() {
   const handleAddToCart = (product) => {
     if (isAuthenticated) {
       dispatch(addToCart({ ...product, quantity: 1 }));
-      // Animasi sukses
       const cartIcon = document.getElementById(`cart-icon-${product.id}`);
       if (cartIcon) {
         cartIcon.classList.add("cart-animation");
@@ -52,7 +51,6 @@ function ProductList() {
     <div className="product-container">
       <h2 className="product-title">Produk</h2>
 
-      {/* Search dan Filter */}
       <div className="product-filters">
         <input
           type="text"

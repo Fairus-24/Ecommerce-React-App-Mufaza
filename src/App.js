@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Navbar from "./components/Navbar";
@@ -11,9 +11,24 @@ import Footer from "./components/Footer";
 
 function App() {
   const ProtectedRoute = ({ children }) => {
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); 
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     return isAuthenticated ? children : <Navigate to="/login" replace />;
   };
+
+  useEffect(() => {
+    const handleCopy = (e) => e.preventDefault();
+    const handleContextMenu = (e) => e.preventDefault();
+
+    document.addEventListener("copy", handleCopy);
+    document.addEventListener("cut", handleCopy);
+    document.addEventListener("contextmenu", handleContextMenu);
+
+    return () => {
+      document.removeEventListener("copy", handleCopy);
+      document.removeEventListener("cut", handleCopy);
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
 
   return (
     <Router>
@@ -42,6 +57,7 @@ function App() {
 const styles = {
   content: {
     paddingBottom: "80px",
+    userSelect: "none", 
   },
 };
 

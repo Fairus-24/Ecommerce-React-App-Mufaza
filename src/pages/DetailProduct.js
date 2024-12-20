@@ -166,6 +166,7 @@ const styles = {
   title: {
     fontSize: "28px",
     fontWeight: "bold",
+    fontFamily: "Roboto, sans-serif",
   },
   productDetail: {
     display: "flex",

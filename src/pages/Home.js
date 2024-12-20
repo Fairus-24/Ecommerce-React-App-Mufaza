@@ -18,7 +18,9 @@ function Home() {
             <Link to="/" style={{ textDecoration: "none" }}>
               <button style={styles.shopNowButton}>MULAI BELANJA</button>
             </Link>
+            <Link to="https://wa.me/6285745775617" style={{ textDecoration: "none" }}>
             <button style={styles.contactUsButton}>Hubungi Kami</button>
+            </Link>
           </div>
         </div>
         <div style={styles.imageContainer}>
