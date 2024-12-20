@@ -43,7 +43,7 @@
     border-radius: 8px;
     padding: 15px;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px #0000001a;
     transition: transform 0.3s;
   }
   
@@ -69,7 +69,7 @@
   .product-category {
     font-size: 14px;
     font-weight: lighter;
-    color: #007bff;
+    color: "#007bff";
     margin-bottom: 10px;
     text-transform: capitalize;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -94,7 +94,7 @@
   }
   
   .detail-button {
-    background-color: #007bff;
+    background-color: #2a9d90;
     color: #fff;
     border: none;
     padding: 8px 12px;
@@ -104,12 +104,12 @@
   }
   
   .detail-button:hover {
-    background-color: #0056b3;
+    background-color: #063631;
   }
   
   .cart-icon {
     font-size: 24px;
-    color: #28a745;
+    color: #ffd000;
     cursor: pointer;
     transition: transform 0.3s;
   }

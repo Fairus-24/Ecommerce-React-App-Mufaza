@@ -12,11 +12,10 @@ function DetailProduct() {
 
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [error, setError] = useState(null); // Declare setError here
+  const [error, setError] = useState(null); 
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  // Get product stock from productsSlice (assuming the stock is stored in a product-specific manner)
   const stock = useSelector((state) => state.products.stock[id] || 0);
 
   useEffect(() => {
@@ -26,21 +25,19 @@ function DetailProduct() {
         const productData = response.data;
         setProduct(productData);
 
-        // Update stock in Redux if not already present
         if (!stock) {
           dispatch(setStock({ id, stock: productData.stock || 20 }));
         }
       })
       .catch((err) => {
-        console.error("Error fetching product:", err);
-        setError("Failed to load product data."); // Use setError to set the error message
+        setError("Gagal Memproses data produk."); 
       });
-  }, [id, dispatch, stock]); // Added `stock` to the dependency array
+  }, [id, dispatch, stock]); 
 
   const handleAddToCart = () => {
     if (isAuthenticated) {
       dispatch(addToCart({ ...product, quantity }));
-      alert("Product added to cart successfully!");
+      alert("Produk berhasil ditambahkan ke Keranjang!");
     } else {
       navigate("/login");
     }
@@ -101,10 +98,8 @@ function DetailProduct() {
           <p style={styles.price}>${product.price}</p>
           <p style={styles.description}>{product.description}</p>
 
-          {/* Kategori Barang */}
           <p style={styles.category}>Kategori: {product.category}</p>
 
-          {/* Rating Produk */}
           <p style={styles.rating}>
             {renderStars(product.rating?.rate || 0)}
             <span style={styles.ratingText}>
@@ -112,7 +107,6 @@ function DetailProduct() {
             </span>
           </p>
 
-          {/* Stok Produk */}
           <p style={styles.stock}>Sisa Stok: {stock}</p>
 
           <div style={styles.quantityContainer}>
@@ -266,7 +260,7 @@ const styles = {
     borderRadius: "5px",
     cursor: "pointer",
   },
-  // Responsiveness for smaller screens
+ 
   "@media (max-width: 768px)": {
     productDetail: {
       flexDirection: "column",

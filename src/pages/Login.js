@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../redux/authSlice";
 import { useNavigate } from "react-router-dom";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import ikon dari react-icons
+import { FaEye, FaEyeSlash } from "react-icons/fa"; 
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // State untuk toggle password visibility
+  const [showPassword, setShowPassword] = useState(false); 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
@@ -22,7 +22,7 @@ function Login() {
       const result = await dispatch(loginUser({ email, password })).unwrap();
       setSuccess(`Selamat datang, ${result.user.name.firstname}!`);
       setTimeout(() => {
-        navigate("/"); // Arahkan ke halaman utama setelah login
+        navigate("/"); 
       }, 1500);
     } catch (err) {
       setError(err || "Password salah!");
@@ -88,7 +88,7 @@ const styles = {
     left: 0,
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "#000",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -99,7 +99,7 @@ const styles = {
     backgroundColor: "#fff",
     padding: "20px",
     borderRadius: "10px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    boxShadow: "0 4px 6px #000",
     width: "90%",
     maxWidth: "400px",
     textAlign: "center",

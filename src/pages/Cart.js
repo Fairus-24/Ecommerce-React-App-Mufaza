@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeFromCart, clearCart } from "../redux/cartSlice";
-import { decreaseStock } from "../redux/productsSlice"; // Import decreaseStock action
+import { decreaseStock } from "../redux/productsSlice"; 
 
 function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
-  const stock = useSelector((state) => state.products.stock); // Get stock from product state
+  const stock = useSelector((state) => state.products.stock); 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -139,7 +139,7 @@ const styles = {
     border: "1px solid #ddd",
     padding: "15px",
     borderRadius: "8px",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+    boxShadow: "0 2px 4px #000",
     position: "relative",
   },
   cartItemImage: {
@@ -210,7 +210,7 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    boxShadow: "0 -2px 4px rgba(0, 0, 0, 0.1)",
+    boxShadow: "0 -2px 4px #000",
   },
   total: {
     fontSize: "20px",

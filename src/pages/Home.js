@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function Home() {
-  const user = useSelector((state) => state.auth.user); // Ambil username dari Redux
+  const user = useSelector((state) => state.auth.user); 
 
   return (
     <div style={styles.container}>
@@ -44,16 +44,16 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-between",
     padding: "40px",
-    flexWrap: "wrap", // Allow elements to wrap in smaller screens
+    flexWrap: "wrap", 
   },
   textContainer: {
     maxWidth: "90%",
     padding: "20px",
-    flex: "1 1 300px", // Allow flexibility for resizing
+    flex: "1 1 300px",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center", // Center text vertically
-    textAlign: "center", // Center text horizontally
+    justifyContent: "center", 
+    textAlign: "center", 
   },
   welcome: {
     fontSize: "24px",
@@ -72,7 +72,7 @@ const styles = {
   buttonsContainer: {
     marginTop: "20px",
     display: "flex",
-    flexWrap: "wrap", // Allow buttons to stack on smaller screens
+    flexWrap: "wrap",
     gap: "10px",
     justifyContent: "center", 
   },
@@ -93,38 +93,37 @@ const styles = {
     cursor: "pointer",
   },
   imageContainer: {
-    flex: "1 1 300px", // Allow image container to resize
-    textAlign: "center", // Center image horizontally
+    flex: "1 1 300px",
+    textAlign: "center",
   },
   image: {
-    maxWidth: "100%", // Ensure image doesn't overflow container
+    maxWidth: "100%", 
     height: "auto",
   },
 
-  // Media Queries for Responsiveness
   "@media (max-width: 768px)": {
     main: {
-      flexDirection: "column", // Switch to column layout on mobile
+      flexDirection: "column", 
       alignItems: "center",
       justifyContent: "center",
       padding: "20px",
     },
     textContainer: {
-      maxWidth: "100%", // Take up full width on small screens
-      textAlign: "center", // Center the text
-      padding: "0 20px", // Add padding on sides for small screens
+      maxWidth: "100%", 
+      textAlign: "center", 
+      padding: "0 20px", 
     },
     welcome: {
-      fontSize: "20px", // Smaller font size for mobile
+      fontSize: "20px", 
     },
     heading: {
-      fontSize: "36px", // Smaller heading size for mobile
+      fontSize: "36px", 
     },
     description: {
-      fontSize: "14px", // Smaller description font for mobile
+      fontSize: "14px", 
     },
     imageContainer: {
-      display: "none", // Hide the image on small screens
+      display: "none", 
     },
   },
 };

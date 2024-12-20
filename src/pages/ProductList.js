@@ -15,7 +15,6 @@ function ProductList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterCategory, setFilterCategory] = useState("all");
 
-  // Ambil data produk saat pertama kali halaman dimuat
   useEffect(() => {
     if (!products.length) {
       dispatch(fetchProducts());
@@ -37,7 +36,6 @@ function ProductList() {
     }
   };
 
-  // Filter produk berdasarkan kategori dan pencarian
   const filteredProducts = products.filter((product) => {
     const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory =

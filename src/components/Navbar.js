@@ -241,11 +241,4 @@ const styles = {
   },
 };
 
-// Hover effects for links
-styles.link[":hover"] = {
-  color: "#2a9d8f",
-  transform: "scale(1.1)",
-  textShadow: "0px 4px 8px rgba(42, 157, 143, 0.6)",
-};
-
 export default Navbar;

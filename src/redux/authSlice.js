@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Thunk untuk login dengan validasi dari API dan mendapatkan token JWT
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (credentials, { getState, rejectWithValue }) => {
@@ -12,9 +11,8 @@ export const loginUser = createAsyncThunk(
       }
 
       const response = await axios.get("https://fakestoreapi.com/users");
-      const firstUser = response.data[0]; // Ambil user index pertama
+      const firstUser = response.data[0]; 
 
-      // Validasi email dan password
       if (
         firstUser.email !== credentials.email ||
         firstUser.password !== credentials.password
@@ -22,7 +20,6 @@ export const loginUser = createAsyncThunk(
         return rejectWithValue("Password tidak valid");
       }
 
-      // Simulasi mendapatkan token dari API JWT (gunakan data user untuk membuat token)
       const tokenResponse = await axios.post(
         "https://fakestoreapi.com/auth/login",
         {
@@ -33,10 +30,9 @@ export const loginUser = createAsyncThunk(
 
       const token = tokenResponse.data.token;
 
-      // Simpan token ke localStorage
       localStorage.setItem("token", token);
 
-      return { user: firstUser, token }; // Kembalikan data user dan token
+      return { user: firstUser, token }; 
     } catch (error) {
       return rejectWithValue("Login gagal");
     }
@@ -58,8 +54,8 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
-      localStorage.removeItem("token"); // Hapus token dari localStorage
-      localStorage.removeItem("user");  // Hapus user dari localStorage
+      localStorage.removeItem("token"); 
+      localStorage.removeItem("user");  
     },
   },
   extraReducers: (builder) => {
@@ -71,7 +67,6 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isAuthenticated = true;
-        // Simpan user ke localStorage
         localStorage.setItem("user", JSON.stringify(action.payload.user));
         state.error = null;
       })
