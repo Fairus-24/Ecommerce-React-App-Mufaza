@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/authSlice";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { FiMenu, FiX } from "react-icons/fi";
-
+ 
 function Navbar() {
   const cartItemsCount = useSelector((state) => state.cart.items.length);
   const user = useSelector((state) => state.auth.user);
@@ -47,8 +47,7 @@ function Navbar() {
           {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
         </button>
       )}
-      <ul
-        style={{
+      <ul style={{
           ...styles.navLinks,
           ...(isMobile && isMenuOpen ? styles.navLinksOpen : {}),
           ...(isMobile && !isMenuOpen ? styles.navLinksHidden : {}),
