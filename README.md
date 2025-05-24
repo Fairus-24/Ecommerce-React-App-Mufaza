@@ -37,8 +37,14 @@ Aplikasi ini dapat diakses secara online di:
 
 Untuk mencoba fitur autentikasi pada aplikasi ini, kamu dapat menggunakan kredensial berikut:
 
-- **Email:** john@gmail.com
-- **Password:** m38rmF$
+- **Email:**
+  ```bash
+  john@gmail.com
+  ```
+- **Password:**
+  ```bash
+  m38rmF$
+  ```
 
 Silakan login dengan data di atas untuk menguji proses autentikasi.
 
