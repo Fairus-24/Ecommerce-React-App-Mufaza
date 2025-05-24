@@ -28,6 +28,20 @@ Berdasarkan file `package.json`, beberapa dependensi utama yang digunakan:
 - `axios` ^1.7.9
 - Pengujian: `@testing-library/react`, `@testing-library/jest-dom`, `@testing-library/user-event`, `jest`, dll.
 
+## Website Demo
+
+Aplikasi ini dapat diakses secara online di:
+[https://ecommercereactappfairus.netlify.app](https://ecommercereactappfairus.netlify.app)
+
+## Uji Coba Autentikasi
+
+Untuk mencoba fitur autentikasi pada aplikasi ini, kamu dapat menggunakan kredensial berikut:
+
+- **Email:** john@gmail.com
+- **Password:** m38rmF$
+
+Silakan login dengan data di atas untuk menguji proses autentikasi.
+
 ## Cara Instalasi & Menjalankan
 
 1. **Clone repository**
